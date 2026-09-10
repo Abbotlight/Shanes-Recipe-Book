@@ -1,0 +1,10 @@
+{
+    "name": "Shane's Recipe Book",
+    "short_name": "Recipes",
+    "description": "My personal recipe book",
+    "start_url": "./",
+    "scope": "./",
+    "display": "standalone",
+    "background_color": "#e8f0e8",
+    "theme_color": "#e8f0e8"
+}
