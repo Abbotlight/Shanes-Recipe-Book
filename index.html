@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shane's Recipe Book</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f0e8;
+            margin: 0;
+        }
+
+        header {
+            background-color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            padding: 20px;
+        }
+.recipe-card {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    max-width: 350px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+
+cursor: pointer;
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recipe-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.20);
+}
+
+.recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 350px));
+    gap: 20px;
+}
+
+.recipe-image {
+    height: 180px;
+}
+
+.recipe-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.recipe-info {
+    padding: 15px;
+}
+
+.recipe-info h2 {
+    margin: 0 0 8px 0;
+}
+
+.recipe-info p {
+    margin: 0;
+    color: #666666;
+}
+.recipe-detail {
+    display: none;
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.recipe-detail button {
+    border: none;
+    background-color: #e8f0e8;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.detail-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+.recipe-stats {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    color: #666666;
+}
+
+.ingredients-list {
+    list-style: none;
+    padding: 0;
+}
+
+.ingredients-list li {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 15px;
+    padding: 5px 0;
+}
+
+.amount {
+    font-weight: bold;
+}
+
+.method-list {
+    padding-left: 20px;
+    line-height: 1.8;
+}
+
+.method-list li {
+    margin-bottom: 10px;
+}
+
+.search-area {
+    margin-bottom: 20px;
+}
+
+.search-area input {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Shane's Recipe Book</h1>
+    </header>
+
+   
+<main>
+
+<div class="search-area">
+
+    <input
+        type="text"
+        id="searchBox"
+        placeholder="Search recipes..."
+        oninput="searchRecipes()"
+    >
+
+</div>
+
+    <div class="recipe-grid" id="recipeGrid">
+
+        <div class="recipe-card" onclick="openRecipe('gummies')">
+
+            <div class="recipe-image">
+                <img src="images/gummies.jpg" alt="Keto Gummies">
+            </div>
+
+            <div class="recipe-info">
+                <h2>Keto Gummies</h2>
+                <p>Snack • Keto</p>
+            </div>
+
+        </div>
+
+
+        <div class="recipe-card" onclick="openRecipe('pizza')">
+
+            <div class="recipe-image">
+                <img src="images/chicken-pizza.jpg" alt="Chicken Pizza Base">
+            </div>
+
+            <div class="recipe-info">
+                <h2>Chicken Pizza Base</h2>
+                <p>Main • High Protein</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="recipe-detail" id="recipeGummies">
+
+        <button onclick="closeRecipe()">← Back</button>
+
+        <img class="detail-image" src="images/gummies.jpg" alt="Keto Gummies">
+
+        <h2>Keto Gummies</h2>
+
+        <div class="recipe-stats">
+            <span>⏱ Prep: 20 mins</span>
+            <span>❄ Chill: 1+ hour</span>
+            <span>🍽 4 servings</span>
+            <span>⭐ Easy</span>
+        </div>
+
+        <h3>Ingredients</h3>
+
+        <ul class="ingredients-list">
+
+            <li>
+                <span class="amount">15 g</span>
+                <span>250 Bloom Gelatine</span>
+            </li>
+
+            <li>
+                <span class="amount">65 ml</span>
+                <span>Squash</span>
+            </li>
+
+            <li>
+                <span class="amount">100 ml</span>
+                <span>Water</span>
+            </li>
+
+        </ul>
+
+
+        <h3>Method</h3>
+
+        <ol class="method-list">
+            <li>Add the 15 g gelatine to the 100 ml cold water and leave it to bloom.</li>
+            <li>Place the jug in a hot-water bath and gently warm it until the gelatine has completely dissolved.</li>
+            <li>Add the 65 ml of squash and mix thoroughly.</li>
+            <li>Pour the mixture into gummy moulds.</li>
+            <li>Refrigerate for at least 1 hour.</li>
+            <li>Remove gummies from mould, cut into 4 pieces and return to fridge uncovered until set.</li>
+        </ol>
+        </div>
+
+<div class="recipe-detail" id="recipePizza">
+
+    <button onclick="closeRecipe()">← Back</button>
+
+    <img class="detail-image" src="images/chicken-pizza.jpg" alt="Chicken Pizza Base">
+
+    <h2>Chicken Pizza Base</h2>
+
+    <div class="recipe-stats">
+        <span>⏱ Prep: 20 mins</span>
+        <span>🔥 Cook: 30 mins</span>
+        <span>🍕 Makes 4 bases</span>
+        <span>⭐ Easy</span>
+    </div>
+
+    <h3>Ingredients</h3>
+
+    <ul class="ingredients-list">
+
+        <li>
+            <span class="amount">4</span>
+            <span>Raw chicken breast</span>
+            <span class="amount">~750g</span>
+            <span>Shredded cooked chicken (target weight)</span>
+        </li>
+
+        <li>
+            <span class="amount">150 g</span>
+            <span>Parmesan cheese</span>
+        </li>
+
+         <li>
+            <span class="amount">75 g</span>
+            <span>Mozzarella cheese</span>
+        </li>
+
+        <li>
+            <span class="amount">3</span>
+            <span>Medium eggs</span>
+        </li>
+
+        <li>
+            <span class="amount">1.5 tsp</span>
+            <span>Garlic granules</span>
+        </li>
+
+        <li>
+            <span class="amount">1.5 tsp</span>
+            <span>Italian herbs</span>
+        </li>
+
+        <li>
+            <span class="amount">To taste</span>
+            <span>Black pepper</span>
+        </li>
+
+         <li>
+            <span class="amount">Additional</span>
+            <span>Mozzarella cheese to act as sauce barrier</span>
+        </li>
+
+    </ul>
+
+
+    <h3>Method</h3>
+
+    <ol class="method-list">
+
+        <li>Cook all 4 chicken breasts in air fryer @ 180C for ~25 mins or until 75C.</li>
+
+        <li>Blitz chicken in food processor.</li>
+
+        <li>Remove chicken and drain as much moisture as possible.</li>
+
+        <li>Add the chicken and the remaining ingredients to the food processor and blitz thoroughly.</li>
+
+        <li>Divide the mixture into 4 equal portions.</li>
+
+        <li>Shape one portion into a pizza base.</li>
+
+        <li>Bake until cooked and browned on both sides.</li>
+
+        <li>Add mozzarella liberally and cook for a further 2-3 mins, then spread and allow to cool.</li>
+
+    </ol>
+
+
+    <h3>Storage</h3>
+
+    <p>
+        Place 3 remaining portions into separate bags, flatten then freeze
+    </p>
+
+</div>
+
+</main>
+
+<script>
+
+    function openRecipe(recipe) {
+
+        document.getElementById("recipeGrid").style.display = "none";
+
+        if (recipe === "gummies") {
+            document.getElementById("recipeGummies").style.display = "block";
+        }
+
+        if (recipe === "pizza") {
+            document.getElementById("recipePizza").style.display = "block";
+        }
+
+    }
+
+
+    function closeRecipe() {
+
+        document.getElementById("recipeGummies").style.display = "none";
+
+        document.getElementById("recipePizza").style.display = "none";
+
+        document.getElementById("recipeGrid").style.display = "grid";
+
+    }
+
+function searchRecipes() {
+
+    const searchText = document
+        .getElementById("searchBox")
+        .value
+        .toLowerCase();
+
+    const recipeCards = document.querySelectorAll(".recipe-card");
+
+    recipeCards.forEach(function(card) {
+
+        const cardText = card.textContent.toLowerCase();
+
+        if (cardText.includes(searchText)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>
