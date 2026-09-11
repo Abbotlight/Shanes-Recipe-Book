@@ -589,6 +589,8 @@ async function allowScreenSleep() {
 
     function openRecipe(recipe) {
 
+        keepScreenAwake();
+
         document.getElementById("recipeGrid").style.display = "none";
 
         if (recipe === "gummies") {
@@ -611,6 +613,8 @@ async function allowScreenSleep() {
 
 
     function closeRecipe() {
+
+        allowScreenSleep();
 
         document.getElementById("recipeGummies").style.display = "none";
 
