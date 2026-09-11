@@ -559,6 +559,34 @@ transition: transform 0.2s ease, box-shadow 0.2s ease;
 
 <script>
 
+let wakeLock = null;
+
+async function keepScreenAwake() {
+
+    if ("wakeLock" in navigator) {
+
+        try {
+            wakeLock = await navigator.wakeLock.request("screen");
+        } catch (error) {
+            console.log("Wake lock failed:", error);
+        }
+
+    }
+
+}
+
+
+async function allowScreenSleep() {
+
+    if (wakeLock !== null) {
+
+        await wakeLock.release();
+        wakeLock = null;
+
+    }
+
+}
+
     function openRecipe(recipe) {
 
         document.getElementById("recipeGrid").style.display = "none";
