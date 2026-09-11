@@ -1,4 +1,4 @@
-const CACHE_NAME = "recipe-book-v2";
+const CACHE_NAME = "recipe-book-v3";
 
 const FILES_TO_CACHE = [
     "./",
@@ -8,28 +8,23 @@ const FILES_TO_CACHE = [
     "./images/gummies.jpg",
     "./images/chicken-pizza.jpg"
     "./images/keto-bread.jpg"
+    "./images/keto-cake.jpg"
 ];
 
-self.addEventListener("install", function(event) {
+self.addEventListener("activate", function(event) {
 
     event.waitUntil(
-        caches.open(CACHE_NAME).then(function(cache) {
-            return cache.addAll(FILES_TO_CACHE);
-        })
-    );
+        caches.keys().then(function(cacheNames) {
 
-});
+            return Promise.all(
+                cacheNames.map(function(cacheName) {
 
-self.addEventListener("fetch", function(event) {
+                    if (cacheName !== CACHE_NAME) {
+                        return caches.delete(cacheName);
+                    }
 
-    event.respondWith(
-        caches.match(event.request).then(function(response) {
-
-            if (response) {
-                return response;
-            }
-
-            return fetch(event.request);
+                })
+            );
 
         })
     );

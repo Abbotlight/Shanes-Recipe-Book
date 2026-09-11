@@ -134,9 +134,11 @@ transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .search-area {
+    display: flex;
+    gap: 10px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
-
 .search-area input {
     width: 100%;
     max-width: 400px;
@@ -145,6 +147,15 @@ transition: transform 0.2s ease, box-shadow 0.2s ease;
     border: 1px solid #cccccc;
     border-radius: 8px;
     box-sizing: border-box;
+}
+
+.search-area select {
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
 }
 
     </style>
@@ -165,14 +176,27 @@ transition: transform 0.2s ease, box-shadow 0.2s ease;
         type="text"
         id="searchBox"
         placeholder="Search recipes..."
-        oninput="searchRecipes()"
+        oninput="filterRecipes()"
     >
 
-</div>
+    <select id="categoryFilter" onchange="filterRecipes()">
 
+        <option value="all">All Recipes</option>
+        <option value="keto">Keto</option>
+        <option value="high-protein">High Protein</option>
+        <option value="snack">Snack</option>
+        <option value="main">Main</option>
+        <option value="side">Side</option>
+        <option value="dessert">Dessert</option>
+
+    </select>
+
+</div>
     <div class="recipe-grid" id="recipeGrid">
 
-        <div class="recipe-card" onclick="openRecipe('gummies')">
+        <div class="recipe-card"
+     data-category="keto snack"
+     onclick="openRecipe('gummies')">
 
             <div class="recipe-image">
                 <img src="images/gummies.jpg" alt="Keto Gummies">
@@ -186,7 +210,9 @@ transition: transform 0.2s ease, box-shadow 0.2s ease;
         </div>
 
 
-        <div class="recipe-card" onclick="openRecipe('pizza')">
+        <div class="recipe-card"
+     data-category="main high-protein"
+     onclick="openRecipe('pizza')">
 
             <div class="recipe-image">
                 <img src="images/chicken-pizza.jpg" alt="Chicken Pizza Base">
@@ -200,7 +226,9 @@ transition: transform 0.2s ease, box-shadow 0.2s ease;
         </div>
 
 
-        <div class="recipe-card" onclick="openRecipe('ketobread')">
+        <div class="recipe-card"
+     data-category="side keto"
+     onclick="openRecipe('ketobread')">
 
             <div class="recipe-image">
                 <img src="images/keto-bread.jpg" alt="Keto Cheesy Bread">
@@ -212,6 +240,22 @@ transition: transform 0.2s ease, box-shadow 0.2s ease;
             </div>
 
         </div>
+
+<div class="recipe-card"
+     data-category="dessert"
+     onclick="openRecipe('ketocake')">
+
+    <div class="recipe-image">
+        <img src="images/keto-cake.jpg" alt="Keto Cake">
+    </div>
+
+    <div class="recipe-info">
+        <h2>Keto Cake</h2>
+        <p>Dessert • Keto</p>
+    </div>
+
+</div>
+
 
     </div>
 
@@ -424,6 +468,91 @@ transition: transform 0.2s ease, box-shadow 0.2s ease;
         </ol>
         </div>
 
+<div class="recipe-detail" id="recipeKetocake">
+
+    <button onclick="closeRecipe()">← Back</button>
+
+    <img class="detail-image"
+         src="images/keto-cake.jpg"
+         alt="Keto Cake">
+
+    <h2>Keto Cake</h2>
+
+    <div class="recipe-stats">
+        <span>⏱ Prep: 15 mins</span>
+        <span>🔥 Cook: 30 mins</span>
+        <span>🍽 Serves: 1</span>
+        <span>⭐ Easy</span>
+    </div>
+
+    <h3>Ingredients</h3>
+
+    <ul class="ingredients-list">
+
+        <li>
+            <span class="amount">2 Scoops</span>
+            <span>Protein powder</span>
+        </li>
+
+        <li>
+            <span class="amount">2 Tbsp</span>
+            <span>Almond flour</span>
+        </li>
+
+        <li>
+            <span class="amount">1 tsp</span>
+            <span>Baking powder</span>
+        </li>
+
+        <li>
+            <span class="amount">2</span>
+            <span>Eggs</span>
+        </li>
+
+
+        <li>
+            <span class="amount">2 Tbsp</span>
+            <span>Water</span>
+        </li>
+
+
+        <li>
+            <span class="amount">2 tsp</span>
+            <span>Melted butter or coconut oil</span>
+        </li>
+
+
+        <li>
+            <span class="amount">Approx 4 drops</span>
+            <span>Liquid sweetener</span>
+        </li>
+
+
+    </ul>
+
+    <h3>Method</h3>
+
+    <ol class="method-list">
+        <li>Mix all dry ingredients. Ensure Baking powder is combined</li>
+        <li>Add all wet ingredients and mix until smooth</li>
+        <li>Pour into silicone loaf tray</li>
+        <li>Bake in air fryer @ 160C for 20 minutes</li>
+
+        <li>Remove from loaf tray, flip and bake for a further 10 minutes</li>
+        <li>Leave to cool for at least 15 minutes</li>
+
+
+    </ol>
+
+    <h3>Storage</h3>
+
+    <p>
+        Keep in airtight container
+    </p>
+
+</div>
+
+
 </div>
 
 </main>
@@ -446,6 +575,10 @@ transition: transform 0.2s ease, box-shadow 0.2s ease;
             document.getElementById("recipeKetobread").style.display = "block";
         }
 
+        if (recipe === "ketocake") {
+            document.getElementById("recipeKetocake").style.display = "block";
+        }
+
     }
 
 
@@ -457,16 +590,22 @@ transition: transform 0.2s ease, box-shadow 0.2s ease;
 
         document.getElementById("recipeKetobread").style.display = "none";
 
+        document.getElementById("recipeKetocake").style.display = "none";
+
         document.getElementById("recipeGrid").style.display = "grid";
 
     }
 
-function searchRecipes() {
+function filterRecipes() {
 
     const searchText = document
         .getElementById("searchBox")
         .value
         .toLowerCase();
+
+    const selectedCategory = document
+        .getElementById("categoryFilter")
+        .value;
 
     const recipeCards = document.querySelectorAll(".recipe-card");
 
@@ -474,7 +613,15 @@ function searchRecipes() {
 
         const cardText = card.textContent.toLowerCase();
 
-        if (cardText.includes(searchText)) {
+        const cardCategories = card.dataset.category;
+
+        const matchesSearch = cardText.includes(searchText);
+
+        const matchesCategory =
+            selectedCategory === "all" ||
+            cardCategories.includes(selectedCategory);
+
+        if (matchesSearch && matchesCategory) {
             card.style.display = "block";
         } else {
             card.style.display = "none";
