@@ -199,6 +199,20 @@ transition: transform 0.2s ease, box-shadow 0.2s ease;
 
         </div>
 
+
+        <div class="recipe-card" onclick="openRecipe('ketobread')">
+
+            <div class="recipe-image">
+                <img src="images/keto-bread.jpg" alt="Keto Cheesy Bread">
+            </div>
+
+            <div class="recipe-info">
+                <h2>Keto Cheesy Bread</h2>
+                <p>Side • Keto</p>
+            </div>
+
+        </div>
+
     </div>
 
 
@@ -344,6 +358,72 @@ transition: transform 0.2s ease, box-shadow 0.2s ease;
         Place 3 remaining portions into separate bags, flatten then freeze
     </p>
 
+    </div>
+
+    <div class="recipe-detail" id="recipeKetobread">
+
+        <button onclick="closeRecipe()">← Back</button>
+
+        <img class="detail-image" src="images/keto-bread.jpg" alt="Keto Cheesy Bread">
+
+        <h2>Keto Cheesy Bread</h2>
+
+        <div class="recipe-stats">
+            <span>⏱ Prep: 10 mins</span>
+            <span>🔥 Cook: 25 mins</span>
+            <span>🍽 1 servings</span>
+            <span>⭐ Easy</span>
+        </div>
+
+        <h3>Ingredients</h3>
+
+        <ul class="ingredients-list">
+
+            <li>
+                <span class="amount">6 Tbsp</span>
+                <span>Almond flour</span>
+            </li>
+
+            <li>
+                <span class="amount">1 tsp</span>
+                <span>Baking powder</span>
+            </li>
+
+            <li>
+                <span class="amount">0.5 tsp</span>
+                <span>Salt</span>
+            </li>
+
+            <li>
+                <span class="amount">2</span>
+                <span>Eggs</span>
+            </li>
+
+            <li>
+                <span class="amount">Handfull</span>
+                <span>Grated cheddar cheese</span>
+            </li>
+
+            <li>
+                <span class="amount">Small handfull</span>
+                <span>Grated mozzarella</span>
+            </li>
+
+        </ul>
+
+
+        <h3>Method</h3>
+
+        <ol class="method-list">
+            <li>Mix all dry ingredients until baking powder is fully combined.</li>
+            <li>Add eggs and mix thoroughly.</li>
+            <li>Add both cheeses and mix again.</li>
+            <li>Spread mixture onto an air fryer liner.</li>
+            <li>Bake @ 180C for 15 minutes.</li>
+            <li>Remove from liner, flip bread and cook for a further 5 minuts.</li>
+        </ol>
+        </div>
+
 </div>
 
 </main>
@@ -362,6 +442,10 @@ transition: transform 0.2s ease, box-shadow 0.2s ease;
             document.getElementById("recipePizza").style.display = "block";
         }
 
+        if (recipe === "ketobread") {
+            document.getElementById("recipeKetobread").style.display = "block";
+        }
+
     }
 
 
@@ -370,6 +454,8 @@ transition: transform 0.2s ease, box-shadow 0.2s ease;
         document.getElementById("recipeGummies").style.display = "none";
 
         document.getElementById("recipePizza").style.display = "none";
+
+        document.getElementById("recipeKetobread").style.display = "none";
 
         document.getElementById("recipeGrid").style.display = "grid";
 

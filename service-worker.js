@@ -7,6 +7,7 @@ const FILES_TO_CACHE = [
     "./icon-512.png",
     "./images/gummies.jpg",
     "./images/chicken-pizza.jpg"
+    "./images/keto-bread.jpg"
 ];
 
 self.addEventListener("install", function(event) {
